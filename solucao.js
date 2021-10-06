@@ -1094,6 +1094,7 @@ var listaProdutos = [
 ]
 
 // 1a questão: • Quantidade total de itens em estoque (somatória das quantidades de todos os produtos)
+// Autor: Ícaro Dias
 
     function questaoUm() {
         var total = 0;
@@ -1105,6 +1106,7 @@ var listaProdutos = [
     } // Shift + Alt + A
 
 // 2a questão: • Quantidade total de itens em destaque (somatória das quantidades dos itens marcados como "emDestaque : sim")
+// Autor: Ícaro Dias
 
     function questaoDois() {
         var total = 0;
@@ -1118,6 +1120,7 @@ var listaProdutos = [
     }
 
 // 3a questão: • Quantidade total de itens disponíveis (similar ao anterior)
+// Autor: Ícaro Dias
 
     function questaoTres() {
         var total = 0;
@@ -1131,6 +1134,7 @@ var listaProdutos = [
     }         
 
 // 4a questão: • Quantidade de itens disponíveis e em destaque
+// Autor: Ícaro Dias
 
     function questaoQuatro() {
         var total = 0;
@@ -1145,7 +1149,69 @@ var listaProdutos = [
         console.log("O total de produtos disponíveis e em destaque é " + total);
     }
 
+// 5) Valor total do inventário da empresa (somatória dos valores individuais multiplicado pela quantidade em estoque - considere apenas os produtos “EM ESTOQUE”)
+// Autor: Pedro Rangel
+
+    function TotaldoInventario(listaProdutos){
+
+        let totalInv = 0;
+
+        for (let i = 0;i<listaProdutos.length;i++){
+            let Produto = listaProdutos[i];
+            if(Produto.qtdEstoque != 0)
+                totalInv += (Produto.preco)*(Produto.qtdEstoque);
+        }
+        return totalInv;
+    }
+
+    totalInventario = TotaldoInventario(listaProdutos);
+    console.log("O valor total do inventário da empresa é de R$ "+totalInventario);
+
+// 6)Produto mais caro da loja (bem como seu departamento - considere apenas o preço dele)
+// Autor: Pedro Rangel
+
+    function produtoMaisCaro(listaProdutos){
+
+        let prodMaisCaro = 0;
+        let DescricaodeptoePrecodoMaisCaro = [];
+        for (let i = 0;i<listaProdutos.length;i++){
+            let produto = listaProdutos[i];
+            if (produto.preco > prodMaisCaro){
+                prodMaisCaro = produto.preco;
+                DescricaodeptoePrecodoMaisCaro [0] = produto.descricao;
+                DescricaodeptoePrecodoMaisCaro [1] = produto.departamento.nomeDepto;
+                DescricaodeptoePrecodoMaisCaro [2] = prodMaisCaro;
+            }
+        } 
+        return DescricaodeptoePrecodoMaisCaro;
+    }
+    let arraydescricaoDeptoePrecoProdMaisCaro = produtoMaisCaro(listaProdutos);
+    console.log("O produto mais caro da loja é o "+arraydescricaoDeptoePrecoProdMaisCaro[0]+", cujo valor é de R$ "+arraydescricaoDeptoePrecoProdMaisCaro[2]+" e o departamento é de "+arraydescricaoDeptoePrecoProdMaisCaro[1]);
+
+// 7) Produto mais barato da loja (bem como seu departamento - considere apenas o preço dele)
+// Autor: Pedro Rangel
+
+    function produtoMaisBarato(listaProdutos,valorProdMaisCaro){
+
+        let prodMaisBarato = valorProdMaisCaro;
+        let DescricaoDeptoePrecoprodMaisBarato = [];
+        for (let i = 0;i<listaProdutos.length;i++){
+            let produto = listaProdutos[i];
+            if (produto.preco < prodMaisBarato){
+                prodMaisBarato = produto.preco;
+                DescricaoDeptoePrecoprodMaisBarato [0] = produto.descricao;
+                DescricaoDeptoePrecoprodMaisBarato [1] = produto.departamento.nomeDepto;
+                DescricaoDeptoePrecoprodMaisBarato [2] = produto.preco;
+            }
+        } 
+        
+        return DescricaoDeptoePrecoprodMaisBarato;
+    }
+    let arraydescricaoDeptoePrecoProdMaisBarato = produtoMaisBarato(listaProdutos,arraydescricaoDeptoePrecoProdMaisCaro [2]);
+    console.log("O produto mais barato da loja é o "+arraydescricaoDeptoePrecoProdMaisBarato[0]+", cujo valor é de R$ "+arraydescricaoDeptoePrecoProdMaisBarato[2]+" e o departamento é de "+arraydescricaoDeptoePrecoProdMaisBarato[1]); 
+
 // 8a questão: • Produto de estoque mais valioso (considere o preço multiplicado pela quantidade e também apenas EM ESTOQUE)
+// Autor: Ícaro Dias
 
     function questaoOito() {
         let total = 0;
@@ -1165,6 +1231,7 @@ var listaProdutos = [
     }
 
 // 9a questão: • Produto em estoque menos valioso (considere o preço multiplicado pela quantidade e também apenas EM ESTOQUE)
+// Autor: Ícaro Dias
 
     function questaoNove() {
         let total = 0;
@@ -1209,6 +1276,7 @@ var listaProdutos = [
     }
 
 // 10a questão: • Valor do ticket médio dos produtos da empresa (basicamente o valor total do inventário dividido pelo número de itens - considere TODOS os produtos, porém considere apenas 1 exemplar por produto)
+// Autor: Ícaro Dias
 
     function questaoDez(){
     // O que eu entendi que a questão pediu foi o preço médio dos produtos considerando apenas um produto por
