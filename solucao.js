@@ -1093,4 +1093,117 @@ var listaProdutos = [
     }
 ]
 
-module.exports = listaProdutos
+// 1a questão: • Quantidade total de itens em estoque (somatória das quantidades de todos os produtos)
+
+function questaoUm() {
+    var total = 0;
+    for (i = 0; i < listaProdutos.length; i++) {
+        let produtos = listaProdutos[i];
+        total = total + produtos.qtdEstoque;
+    }
+    console.log("O total de produtos em estoque é " + total);
+} // Shift + Alt + A
+
+// 2a questão: • Quantidade total de itens em destaque (somatória das quantidades dos itens marcados como "emDestaque : sim")
+
+function questaoDois() {
+    var total = 0;
+    for (i = 0; i < listaProdutos.length; i++) {
+        if (listaProdutos[i].emDestaque == "sim") {
+            let produtos = listaProdutos[i];
+            total = total + produtos.qtdEstoque;
+        }
+    }
+    console.log("O total de produtos em Destaque é " + total);
+}
+
+// 3a questão: • Quantidade total de itens disponíveis (similar ao anterior)
+
+function questaoTres() {
+    var total = 0;
+    for (i = 0; i < listaProdutos.length; i++) {
+        if (listaProdutos[i].disponivel === "sim") {
+            let produtos = listaProdutos[i];
+            total = total + produtos.qtdEstoque;
+        }
+    }
+    console.log("O total total de produtos disponíveis é R$" + total);
+}
+
+// 4a questão: • Quantidade de itens disponíveis e em destaque
+
+function questaoQuatro() {
+    var total = 0;
+    for (i = 0; i < listaProdutos.length; i++) {
+        if (listaProdutos[i].emDestaque === "sim") {
+            if (listaProdutos[i].disponivel === "sim") {
+                let produtos = listaProdutos[i];
+                total = total + produtos.qtdEstoque;
+            }
+        }
+    }
+    console.log("O total de produtos disponíveis e em destaque é " + total);
+}
+
+// 8a questão: • Produto de estoque mais valioso (considere o preço multiplicado pela quantidade e também apenas EM ESTOQUE)
+
+function questaoOito() {
+    let total = 0;
+    let nome;
+    let id;
+    for (i = 0; i < listaProdutos.length; i++) {
+        let produtos = listaProdutos[i];
+        if (produtos.qtdEstoque > 0) {
+            if (total < (produtos.qtdEstoque * produtos.preco)) {
+                total = (produtos.qtdEstoque * produtos.preco);
+                nome = produtos.descricao;
+                id = produtos.codProduto;
+            }
+        }
+    }
+    console.log("o produto de estoque mais valioso é [" + id + "] " + nome + " cujo preço de estoque total é R$" + total);
+}
+
+// 9a questão: • Produto em estoque menos valioso (considere o preço multiplicado pela quantidade e também apenas EM ESTOQUE)
+
+function questaoNove() {
+    let total = 0;
+    let j = 0;
+
+    do {
+        if (listaProdutos[j].qtdEstoque > 0) {
+            total = listaProdutos[j].preco * listaProdutos[j].qtdEstoque;
+        } 
+        if (j == listaProdutos.length + 1) {
+            console.log("Não há estoque disponível para consulta.")
+            break;
+        }
+    } while (total == 0);
+   
+    // O objetivo desse 'do while' foi definir um valor total mínimo existente no
+    // banco de dados a fim de não tomar um valor arbitrário como referência.
+    //
+    // Como esse 'do while' funciona? 
+    // R.: Ele pega o primeiro item do banco de dados com estoque diferente de zero e
+    //     faz a variável 'total' ser igual ao valor total desse estoque. Caso não 
+    //     haja nenhum item em estoque no banco de dados, ele retorna a mensagem 
+    //     acima e para o looping.
+    // 
+    // Para que ele faz isso?
+    // R.: Para no próximo looping o programa partir de dados que realmente existam
+    //     como referência ao invés de partir dados arbitrários.
+   
+    let nome;
+    let id;
+    for (i = 0; i < listaProdutos.length; i++) {
+        let produtos = listaProdutos[i];
+        if (produtos.qtdEstoque > 0) {
+            if (total > (produtos.qtdEstoque * produtos.preco) && total != 0) {
+                total = (produtos.qtdEstoque * produtos.preco);
+                nome = produtos.descricao;
+                id = produtos.codProduto;
+            }
+        }
+    }
+    console.log("o produto de estoque menos valioso é [" + id + "] " + nome + " cujo preço de estoque total é R$" + total);
+}
