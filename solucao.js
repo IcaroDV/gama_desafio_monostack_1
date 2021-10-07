@@ -1094,204 +1094,209 @@ var listaProdutos = [
 ]
 
 // 1a questão: • Quantidade total de itens em estoque (somatória das quantidades de todos os produtos)
-// Autor: Ícaro Dias
+// Autor: Gabriel Jucá
 
-    function questaoUm() {
-        var total = 0;
-        for (i = 0; i < listaProdutos.length; i++) {
-            let produtos = listaProdutos[i];
-            total = total + produtos.qtdEstoque;
-        }
-        console.log("O total de produtos em estoque é " + total);
-    } // Shift + Alt + A
+function exercicio1() {
+    var total = 0;//Essa é minha variavel  que vai acumular o total de produtos
+    //quando ela deve valer inicialmente? 0, pois antes de percorrer a lista, não
+    //tenho nenhum produto
+
+    //como percorro uma lista?
+    for (i = 0; i < listaProdutos.length; i++) {
+        //o que eu faço a cada linha? 
+        let produto = listaProdutos[i];
+        total = total + produto.qtdEstoque //soma a este total a quantidade de produtos em estoque 
+    }
+    //No final do algoritmo, exibo esse total, numa mensagem para o usuário
+    console.log("Total de produtos em estoque é: " + total)
+}
 
 // 2a questão: • Quantidade total de itens em destaque (somatória das quantidades dos itens marcados como "emDestaque : sim")
-// Autor: Ícaro Dias
+// Autor: Gabriel Jucá
 
-    function questaoDois() {
-        var total = 0;
-        for (i = 0; i < listaProdutos.length; i++) {
-            if (listaProdutos[i].emDestaque == "sim") {
-                let produtos = listaProdutos[i];
-                total = total + produtos.qtdEstoque;
-            }
+function exercicio2() {
+    var total = 0;
+    for (i = 0; i < listaProdutos.length; i++) {
+        let produto = listaProdutos[i];
+        if (produto.emDestaque == "sim") {
+            total = total + produto.qtdEstoque;
         }
-        console.log("O total de produtos em Destaque é " + total);
+
     }
+    console.log("Total de produtos em destaque: " + total)
+}
+
 
 // 3a questão: • Quantidade total de itens disponíveis (similar ao anterior)
-// Autor: Ícaro Dias
+// Autor: Grabriel Jucá
 
-    function questaoTres() {
-        var total = 0;
-        for (i = 0; i < listaProdutos.length; i++) {
-            if (listaProdutos[i].disponivel === "sim") {
-                let produtos = listaProdutos[i];
-                total = total + produtos.qtdEstoque;
-            }
+function exercicio3() {
+    var total = 0;
+    for (i = 0; i < listaProdutos.length; i++) {
+        let produto = listaProdutos[i];
+        if (produto.disponivel == "sim") {
+            total = total + produto.qtdEstoque
         }
-        console.log("O total total de produtos disponíveis é R$" + total);
-    }         
+    }
+    console.log("Total de produtos em disponível: " + total)
+}
 
 // 4a questão: • Quantidade de itens disponíveis e em destaque
-// Autor: Ícaro Dias
+// Autor: Gabriel Jucá
 
-    function questaoQuatro() {
-        var total = 0;
-        for (i = 0; i < listaProdutos.length; i++) {
-            if (listaProdutos[i].emDestaque === "sim") {
-                if (listaProdutos[i].disponivel === "sim") {
-                    let produtos = listaProdutos[i];
-                    total = total + produtos.qtdEstoque;
-                }
-            }
+function exercicio4() {
+    var total = 0;
+    for (i = 0; i < listaProdutos.length; i++) {
+        let produto = listaProdutos[i];
+        if (produto.disponivel && produto.emDestaque == "sim") {
+            total = total + produto.qtdEstoque
         }
-        console.log("O total de produtos disponíveis e em destaque é " + total);
     }
+    console.log("Total de produtos em disponíveis e destaque: " + total)
+}
+// Shift + Alt + A
 
-// 5) Valor total do inventário da empresa (somatória dos valores individuais multiplicado pela quantidade em estoque - considere apenas os produtos “EM ESTOQUE”)
+// 5a questão: • Valor total do inventário da empresa (somatória dos valores individuais multiplicado pela quantidade em estoque - considere apenas os produtos “EM ESTOQUE”)
 // Autor: Pedro Rangel
 
-    function TotaldoInventario(listaProdutos){
+function TotaldoInventario(listaProdutos) {
 
-        let totalInv = 0;
+    let totalInv = 0;
 
-        for (let i = 0;i<listaProdutos.length;i++){
-            let Produto = listaProdutos[i];
-            if(Produto.qtdEstoque != 0)
-                totalInv += (Produto.preco)*(Produto.qtdEstoque);
+    for (let i = 0; i < listaProdutos.length; i++) {
+        let Produto = listaProdutos[i];
+        if (Produto.qtdEstoque != 0)
+            totalInv += (Produto.preco) * (Produto.qtdEstoque);
+    }
+    return totalInv;
+}
+
+totalInventario = TotaldoInventario(listaProdutos);
+console.log("O valor total do inventário da empresa é de R$ " + totalInventario);
+
+// 6a questão: • Produto mais caro da loja (bem como seu departamento - considere apenas o preço dele)
+// Autor: Pedro Rangel
+
+function produtoMaisCaro(listaProdutos) {
+
+    let prodMaisCaro = 0;
+    let DescricaodeptoePrecodoMaisCaro = [];
+    for (let i = 0; i < listaProdutos.length; i++) {
+        let produto = listaProdutos[i];
+        if (produto.preco > prodMaisCaro) {
+            prodMaisCaro = produto.preco;
+            DescricaodeptoePrecodoMaisCaro[0] = produto.descricao;
+            DescricaodeptoePrecodoMaisCaro[1] = produto.departamento.nomeDepto;
+            DescricaodeptoePrecodoMaisCaro[2] = prodMaisCaro;
         }
-        return totalInv;
     }
+    return DescricaodeptoePrecodoMaisCaro;
+}
+let arraydescricaoDeptoePrecoProdMaisCaro = produtoMaisCaro(listaProdutos);
+console.log("O produto mais caro da loja é o " + arraydescricaoDeptoePrecoProdMaisCaro[0] + ", cujo valor é de R$ " + arraydescricaoDeptoePrecoProdMaisCaro[2] + " e o departamento é de " + arraydescricaoDeptoePrecoProdMaisCaro[1]);
 
-    totalInventario = TotaldoInventario(listaProdutos);
-    console.log("O valor total do inventário da empresa é de R$ "+totalInventario);
-
-// 6)Produto mais caro da loja (bem como seu departamento - considere apenas o preço dele)
+// 7a questão: • Produto mais barato da loja (bem como seu departamento - considere apenas o preço dele)
 // Autor: Pedro Rangel
 
-    function produtoMaisCaro(listaProdutos){
+function produtoMaisBarato(listaProdutos, valorProdMaisCaro) {
 
-        let prodMaisCaro = 0;
-        let DescricaodeptoePrecodoMaisCaro = [];
-        for (let i = 0;i<listaProdutos.length;i++){
-            let produto = listaProdutos[i];
-            if (produto.preco > prodMaisCaro){
-                prodMaisCaro = produto.preco;
-                DescricaodeptoePrecodoMaisCaro [0] = produto.descricao;
-                DescricaodeptoePrecodoMaisCaro [1] = produto.departamento.nomeDepto;
-                DescricaodeptoePrecodoMaisCaro [2] = prodMaisCaro;
-            }
-        } 
-        return DescricaodeptoePrecodoMaisCaro;
+    let prodMaisBarato = valorProdMaisCaro;
+    let DescricaoDeptoePrecoprodMaisBarato = [];
+    for (let i = 0; i < listaProdutos.length; i++) {
+        let produto = listaProdutos[i];
+        if (produto.preco < prodMaisBarato) {
+            prodMaisBarato = produto.preco;
+            DescricaoDeptoePrecoprodMaisBarato[0] = produto.descricao;
+            DescricaoDeptoePrecoprodMaisBarato[1] = produto.departamento.nomeDepto;
+            DescricaoDeptoePrecoprodMaisBarato[2] = produto.preco;
+        }
     }
-    let arraydescricaoDeptoePrecoProdMaisCaro = produtoMaisCaro(listaProdutos);
-    console.log("O produto mais caro da loja é o "+arraydescricaoDeptoePrecoProdMaisCaro[0]+", cujo valor é de R$ "+arraydescricaoDeptoePrecoProdMaisCaro[2]+" e o departamento é de "+arraydescricaoDeptoePrecoProdMaisCaro[1]);
 
-// 7) Produto mais barato da loja (bem como seu departamento - considere apenas o preço dele)
-// Autor: Pedro Rangel
-
-    function produtoMaisBarato(listaProdutos,valorProdMaisCaro){
-
-        let prodMaisBarato = valorProdMaisCaro;
-        let DescricaoDeptoePrecoprodMaisBarato = [];
-        for (let i = 0;i<listaProdutos.length;i++){
-            let produto = listaProdutos[i];
-            if (produto.preco < prodMaisBarato){
-                prodMaisBarato = produto.preco;
-                DescricaoDeptoePrecoprodMaisBarato [0] = produto.descricao;
-                DescricaoDeptoePrecoprodMaisBarato [1] = produto.departamento.nomeDepto;
-                DescricaoDeptoePrecoprodMaisBarato [2] = produto.preco;
-            }
-        } 
-        
-        return DescricaoDeptoePrecoprodMaisBarato;
-    }
-    let arraydescricaoDeptoePrecoProdMaisBarato = produtoMaisBarato(listaProdutos,arraydescricaoDeptoePrecoProdMaisCaro [2]);
-    console.log("O produto mais barato da loja é o "+arraydescricaoDeptoePrecoProdMaisBarato[0]+", cujo valor é de R$ "+arraydescricaoDeptoePrecoProdMaisBarato[2]+" e o departamento é de "+arraydescricaoDeptoePrecoProdMaisBarato[1]); 
+    return DescricaoDeptoePrecoprodMaisBarato;
+}
+let arraydescricaoDeptoePrecoProdMaisBarato = produtoMaisBarato(listaProdutos, arraydescricaoDeptoePrecoProdMaisCaro[2]);
+console.log("O produto mais barato da loja é o " + arraydescricaoDeptoePrecoProdMaisBarato[0] + ", cujo valor é de R$ " + arraydescricaoDeptoePrecoProdMaisBarato[2] + " e o departamento é de " + arraydescricaoDeptoePrecoProdMaisBarato[1]);
 
 // 8a questão: • Produto de estoque mais valioso (considere o preço multiplicado pela quantidade e também apenas EM ESTOQUE)
 // Autor: Ícaro Dias
 
-    function questaoOito() {
-        let total = 0;
-        let nome;
-        let id;
-        for (i = 0; i < listaProdutos.length; i++) {
-            let produtos = listaProdutos[i];
-            if (produtos.qtdEstoque > 0) {
-                if (total < (produtos.qtdEstoque * produtos.preco)) {
-                    total = (produtos.qtdEstoque * produtos.preco);
-                    nome = produtos.descricao;
-                    id = produtos.codProduto;
-                }
+function questaoOito() {
+    let total = 0;
+    let nome;
+    let id;
+    for (i = 0; i < listaProdutos.length; i++) {
+        let produtos = listaProdutos[i];
+        if (produtos.qtdEstoque > 0) {
+            if (total < (produtos.qtdEstoque * produtos.preco)) {
+                total = (produtos.qtdEstoque * produtos.preco);
+                nome = produtos.descricao;
+                id = produtos.codProduto;
             }
         }
-        console.log("o produto de estoque mais valioso é [" + id + "] " + nome + " cujo preço de estoque total é R$" + total);
     }
+    console.log("o produto de estoque mais valioso é [" + id + "] " + nome + " cujo preço de estoque total é R$" + total);
+}
 
 // 9a questão: • Produto em estoque menos valioso (considere o preço multiplicado pela quantidade e também apenas EM ESTOQUE)
 // Autor: Ícaro Dias
 
-    function questaoNove() {
-        let total = 0;
-        let j = 0;
+function questaoNove() {
+    let total = 0;
+    let j = 0;
 
-        do {
-            if (listaProdutos[j].qtdEstoque > 0) {
-                total = listaProdutos[j].preco * listaProdutos[j].qtdEstoque;
-            } 
-            if (j == listaProdutos.length + 1) {
-                console.log("Não há estoque disponível para consulta.")
-                break;
-            }
-        } while (total == 0);
-    
-        // O objetivo desse 'do while' foi definir um valor total mínimo existente no
-        // banco de dados a fim de não tomar um valor arbitrário como referência.
-        //
-        // Como esse 'do while' funciona? 
-        // R.: Ele pega o primeiro item do banco de dados com estoque diferente de zero e
-        //     faz a variável 'total' ser igual ao valor total desse estoque. Caso não 
-        //     haja nenhum item em estoque no banco de dados, ele retorna a mensagem 
-        //     acima e para o looping.
-        // 
-        // Para que ele faz isso?
-        // R.: Para no próximo looping o programa partir de dados que realmente existam
-        //     como referência ao invés de partir dados arbitrários.
-    
-        let nome;
-        let id;
-        for (i = 0; i < listaProdutos.length; i++) {
-            let produtos = listaProdutos[i];
-            if (produtos.qtdEstoque > 0) {
-                if (total > (produtos.qtdEstoque * produtos.preco) && total != 0) {
-                    total = (produtos.qtdEstoque * produtos.preco);
-                    nome = produtos.descricao;
-                    id = produtos.codProduto;
-                }
+    do {
+        if (listaProdutos[j].qtdEstoque > 0) {
+            total = listaProdutos[j].preco * listaProdutos[j].qtdEstoque;
+        }
+        if (j == listaProdutos.length + 1) {
+            console.log("Não há estoque disponível para consulta.")
+            break;
+        }
+    } while (total == 0);
+
+    // O objetivo desse 'do while' foi definir um valor total mínimo existente no
+    // banco de dados a fim de não tomar um valor arbitrário como referência.
+    //
+    // Como esse 'do while' funciona? 
+    // R.: Ele pega o primeiro item do banco de dados com estoque diferente de zero e
+    //     faz a variável 'total' ser igual ao valor total desse estoque. Caso não 
+    //     haja nenhum item em estoque no banco de dados, ele retorna a mensagem 
+    //     acima e para o looping.
+    // 
+    // Para que ele faz isso?
+    // R.: Para no próximo looping o programa partir de dados que realmente existam
+    //     como referência ao invés de partir dados arbitrários.
+
+    let nome;
+    let id;
+    for (i = 0; i < listaProdutos.length; i++) {
+        let produtos = listaProdutos[i];
+        if (produtos.qtdEstoque > 0) {
+            if (total > (produtos.qtdEstoque * produtos.preco) && total != 0) {
+                total = (produtos.qtdEstoque * produtos.preco);
+                nome = produtos.descricao;
+                id = produtos.codProduto;
             }
         }
-        console.log("o produto de estoque menos valioso é [" + id + "] " + nome + " cujo preço de estoque total é R$" + total);
     }
+    console.log("o produto de estoque menos valioso é [" + id + "] " + nome + " cujo preço de estoque total é R$" + total);
+}
 
 // 10a questão: • Valor do ticket médio dos produtos da empresa (basicamente o valor total do inventário dividido pelo número de itens - considere TODOS os produtos, porém considere apenas 1 exemplar por produto)
 // Autor: Ícaro Dias
 
-    function questaoDez(){
+function questaoDez() {
     // O que eu entendi que a questão pediu foi o preço médio dos produtos considerando apenas um produto por
     // código, desconsiderando o estoque.
     //
     // Então o que esse código faz é somar o preço de todos os produtos e dividir pelo número de produtos da loja,
     // e não pelo número de produtos total em estoque.
-        let total = 0;
-        let nome;
-        let id;
-        for (i = 0; i < listaProdutos.length; i++) {
-            let produtos = listaProdutos[i];
-            total = total + produtos.preco
-        }
-
-        total = total / listaProdutos.length;
-        console.log("O valor do ticket médio é: R$" + total);
+    let total = 0;
+    for (i = 0; i < listaProdutos.length; i++) {
+        let produtos = listaProdutos[i];
+        total = total + produtos.preco
     }
+
+    total = total / listaProdutos.length;
+    console.log("O valor do ticket médio é: R$" + total);
+}
