@@ -1226,12 +1226,10 @@ function questaoOito() {
     let id;
     for (i = 0; i < listaProdutos.length; i++) {
         let produtos = listaProdutos[i];
-        if (produtos.qtdEstoque > 0) {
-            if (total < (produtos.qtdEstoque * produtos.preco)) {
-                total = (produtos.qtdEstoque * produtos.preco);
-                nome = produtos.descricao;
-                id = produtos.codProduto;
-            }
+        if (produtos.qtdEstoque > 0 && total < (produtos.qtdEstoque * produtos.preco)) {
+            total = (produtos.qtdEstoque * produtos.preco);
+            nome = produtos.descricao;
+            id = produtos.codProduto;
         }
     }
     console.log("o produto de estoque mais valioso é [" + id + "] " + nome + " cujo preço de estoque total é R$" + total);
@@ -1248,6 +1246,7 @@ function questaoNove() {
         if (listaProdutos[j].qtdEstoque > 0) {
             total = listaProdutos[j].preco * listaProdutos[j].qtdEstoque;
         }
+        j++;
         if (j == listaProdutos.length + 1) {
             console.log("Não há estoque disponível para consulta.")
             break;
