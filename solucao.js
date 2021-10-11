@@ -1270,12 +1270,10 @@ function questaoNove() {
     let id;
     for (i = 0; i < listaProdutos.length; i++) {
         let produtos = listaProdutos[i];
-        if (produtos.qtdEstoque > 0) {
-            if (total > (produtos.qtdEstoque * produtos.preco) && total != 0) {
-                total = (produtos.qtdEstoque * produtos.preco);
-                nome = produtos.descricao;
-                id = produtos.codProduto;
-            }
+        if (produtos.qtdEstoque > 0 && total > (produtos.qtdEstoque * produtos.preco) && total != 0) {
+            total = (produtos.qtdEstoque * produtos.preco);
+            nome = produtos.descricao;
+            id = produtos.codProduto;
         }
     }
     console.log("o produto de estoque menos valioso é [" + id + "] " + nome + " cujo preço de estoque total é R$" + total);
