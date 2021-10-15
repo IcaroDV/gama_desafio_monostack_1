@@ -1411,3 +1411,79 @@ function questaoOnze() {
     }
     console.log(categoria)
 */
+
+// 12a questão: • Valor total do inventário por departamento (similar ao item anterior - considere TODOS os produtos)
+
+// Autor: Ícaro Dias
+
+
+function questaoDoze() {
+    let dpto;
+    let totalDeptos = 9;
+    let filaId = [];
+    let filaNome = [];
+    let filaTotalItens = [];
+    let listaDeptos = [];
+    let totalItens = 0;
+    let filaTotalDpto = [];
+    let valorTotal = 0;
+
+    // criar um vetor com o comprimento do número de departamentos da loja;
+    for (i = 0; i < totalDeptos; i++) {
+        filaId.push(i + 1);
+    }
+
+    // criar um vetor com todos os nomes dos departamentos a partir da varredura do
+    // objeto fornecido pelo time da gama, pegando o nome do dpto pelo id.
+    {
+        let i = 0;
+        for (j = 0; j < listaProdutos.length; j++) {
+            let produto = listaProdutos[j];
+            if (produto.departamento.idDepto == filaId[i]) {
+                let aux = produto.departamento.nomeDepto;
+                filaNome.push(aux);
+                i++;
+            }
+        }
+    }
+
+    // parte mais complicada pra mim foi essa. criar um vetor puaxando a quantidade 
+    // em estoque a partir do id.
+    {
+        let aux2 = 1;
+        let aux3 = 0;
+        for (j = 0; j < listaProdutos.length; j++) {
+            let produto = listaProdutos[j];
+            let aux = produto.departamento.idDepto;
+            valorTotal = produto.preco * produto.qtdEstoque;
+            // aux = 1  
+            if (aux === aux2) {
+            for (i = 1; i <= listaProdutos.length; i++) {
+                    aux3 = aux3 + valorTotal;
+                }
+                filaTotalDpto.push(aux3);
+                aux2++;
+                valorTotal=0;
+            }
+        }
+    }
+
+    // imprir todos os dptos e seus respectivos ids na tela e receber o dpto a ser
+    // consultado.
+    {
+        for (i = 0; i < totalDeptos; i++) {
+            console.log(filaNome[i] + ' : ' + filaId[i] + '\n')
+        }
+        dpto = prompt("Digite o n° do departamento que você deseja consultar:");
+        console.log(dpto);
+    }
+
+    // imprimir na tela o objeto contendo o nome, o id e o total de itens por dpto
+    for (i = 0; i < totalDeptos; i++) {
+        let itemLista = {
+            valorTotalDpto : "R$ " + filaTotalDpto[i],
+        }
+        listaDeptos.push(itemLista);
+    }
+    console.log(listaDeptos[dpto - 1]);
+}
